@@ -1,0 +1,63 @@
+// Place all the styles related to the Summary controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.summary {
+
+  .green {
+    color: green;
+  }
+  .red {
+    color: red;
+  }
+
+  margin-top: 0px;
+  margin-bottom: 20px;
+  .user_name {
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-left: 10px;
+    margin-top: 15px;
+    text-decoration: underline;
+  }
+  .time_left {
+    margin-left: 10px;
+    margin-top: 15px;
+  }
+  .summery_select{
+    margin-top: 25px;
+    margin-left: 10px;
+  }
+  table {
+    margin-top: 10px;
+    tbody{
+      .spaceUnder {
+        margin-top: 20px;
+        .stock_symbol{
+          a {
+            color: blue;
+          }
+        }
+      }
+      tr{
+        td,th {
+          padding: 0px 40px 0 10px;
+          height: 20px;
+          form {
+            input{
+              margin-bottom: 5px;
+              margin-top: 5px;
+
+            }
+          }
+        }
+        td {
+          text-align: center;
+          img {
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+  }
+}

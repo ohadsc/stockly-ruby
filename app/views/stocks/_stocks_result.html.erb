@@ -1,0 +1,23 @@
+<% stocks.each do |stock| %>
+
+    <tr class="spaceUnder">
+      <td class="stock_symbol"><%= link_to stock.symbol.upcase, "http://finance.yahoo.com/q?s=#{stock.symbol.upcase}", target: '_blank'  %></td>
+      <td><%= stock.lastTradePriceOnly  %></td>
+      <td><%= stock.change  %></td>
+
+      <% if stock.start_price.nil? %>
+          <td>NA</td>
+      <% else %>
+          <td><%= stock.start_price  %></td>
+      <% end %>
+
+
+      <% if stock.start_price.nil? %>
+          <td>NA</td>
+      <% else %>
+          <td><%= "#{((stock.lastTradePriceOnly.to_f - stock.start_price.to_f)*100 / stock.start_price.to_f).round(2)}%" %></td>
+      <% end %>
+
+      <td><%= link_to 'Remove', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+<% end %>

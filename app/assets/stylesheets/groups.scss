@@ -1,0 +1,46 @@
+// Place all the styles related to the Groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.group_list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.new_group {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 30px;
+
+  input{
+    float:left;
+  }
+
+  div.group_users {
+    margin-top: 30px;
+    width: 300px;
+
+    input {
+      float:left;
+      margin-top: 2px;
+      display: inline-block;
+    }
+
+    div {
+      float: left;
+      display: inline;
+      position: absolute;
+      margin-left: 10px;
+    }
+  }
+}
+
+.new_group_submit {
+  margin-bottom: 60px;
+  margin-top: 20px;
+  input {
+    float:left;
+  }
+}

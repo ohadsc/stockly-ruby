@@ -1,0 +1,23 @@
+{
+  "name": "humble",
+  "version": "0.0.0",
+  "authors": [
+    "Ohad Schachtel <ohad.schachtel@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-messages": "~1.4.7"
+  }
+}

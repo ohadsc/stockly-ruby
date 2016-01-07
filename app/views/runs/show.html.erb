@@ -1,0 +1,21 @@
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @run.duration %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @run.status.active?  ? "Active" : "Pending" %>
+</p>
+<p>
+  <strong>Group:</strong>
+  <%= @run.group_name %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_run_path(@run) %> |
+<%= link_to 'Back', runs_path %>

@@ -1,0 +1,116 @@
+<div class="new_group">
+  <div>
+    <input type="text" id="group_name" placeholder="Group Name"/>
+  </div>
+
+  <div class="group_users">
+    <input type="text" placeholder="User's email" id="user_email"/>
+    <input type="button" onclick='addUserClient()' value="Add User"/>
+
+    <div>
+      <table id="myTable">
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="new_group_submit">
+  <input type="button" id="submit_btn" onclick='submit()' value="Create"/>
+</div>
+
+<div style="clear: both"/>
+
+<script>
+    $(document).ready(function () {
+        user_count = 0, user_emails = [];
+
+        var group_name = "<%= group.name %>"
+        if (group_name) {
+            $('#group_name').val(group_name);
+        }
+        var mode = "<%= action_name %>";
+        if (mode === "edit") {
+            $('#submit_btn').val("Update");
+            var group_users_str = "<%= group.user_emails %>"
+            if (group_users_str) {
+                $.each(group_users_str.split(","), function (index, value) {
+                    addUserNameToTable(value)
+                });
+            }
+        }
+
+    });
+
+
+    function submit() {
+        var httpType = $('#submit_btn').val() === "Create" ? 'POST' : 'PUT'
+        var url = "/groups";
+        if (httpType == 'PUT') {
+            var g_id = "<%= group.id %>";
+            if (g_id) {
+                url += "/" + g_id
+            }
+        }
+        var group_name = $('#group_name').val()
+        if (!group_name) {
+            alert('Empty Group Name')
+        } else if (user_emails.length == 0) {
+            alert('Group Has No Users')
+        } else {
+            var data = {"user_emails": user_emails, "group_name": group_name}
+            var dJson = JSON.stringify(data)
+            $.ajax({
+                type: httpType,
+                contentType: 'application/json; charset=utf-8',
+                data: dJson,
+                dataType: 'json',
+                cache: false,
+                url: url,
+            }).complete(function (r) {
+                if (r.responseText === "group_creation_failed") {
+                    alert("Group Creation Failed")
+                } else {
+                    window.location = "/groups";
+                }
+            })
+        }
+    }
+
+    function addUserNameToTable(email) {
+        user_count++;
+        var td = $('<td></td>')
+        td.text(user_count + ". " + email)
+        var tr = $('<tr></tr>')
+        tr.append(td)
+        $('#myTable > tbody:last-child').append(tr);
+        $('#user_email').val("");
+    }
+
+    function addUserClient() {
+        var user_email = $('#user_email').val()
+        if (user_email && $.inArray(user_email, user_emails) == -1) {
+            var data = {"email": user_email}
+            var dJson = JSON.stringify(data)
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: dJson,
+                dataType: 'json',
+                cache: false,
+                url: "/user/validate",
+            }).complete(function (r) {
+                if (r.responseText === "user_not_found") {
+                    alert('User Not Found')
+                } else if (r.responseText === "user_found") {
+                    user_emails.push(user_email)
+                    addUserNameToTable(user_email)
+                }
+
+            })
+        }
+    }
+
+</script>

@@ -1,0 +1,41 @@
+.run_list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  table {
+    tbody{
+      .spaceUnder {
+        margin-top: 20px;
+      }
+      tr{
+        td,th {
+          padding: 0px 40px 0 10px;
+          height: 20px;
+          form {
+            input{
+              margin-bottom: 5px;
+              margin-top: 5px;
+
+            }
+          }
+        }
+        td {
+          text-align: center;
+          img {
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.new_run {
+  margin-top: 20px;
+  div {
+    margin-bottom: 20px;
+    a {
+      margin-left: 11px;
+    }
+  }
+}
+

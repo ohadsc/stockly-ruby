@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Hello World, AngularJS - ViralPatel.net</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="/angular/scripts/controller.js"></script>
+
+</head>
+<body>
+
+<div ng-controller='MyController'>
+
+    <input ng-model="person.name" type="text" placeholder="Your name">
+    <h1>Hello {{ person.name | uppercase }}</h1>
+    <h1> {{ clock.now | date:'yyyy-MM-dd HH:mm:ss' }}</h1>
+
+    --------------------
+    <h1>{{ ['Ari', 'Lerner', 'Likes', 'To', 'Eat', 'Pizza'] | filter:'es' }}</h1>
+    --------------------
+    <h1> {{ 'ginger loves DOG treats' | lowercase | capitalize  }} </h1>
+
+
+
+</div>
+
+<div ng-controller='OtherController'>
+
+    <h1>Hello {{ name }}</h1>
+
+    <div ng-controller='AddController'>
+
+        <h1>{{ name }}, please add something</h1>
+        <button ng-click="add(1)" class="button">Add</button>
+        <button ng-click="subtract(1)" class="button alert">Subtract</button>
+        <h4>Current count: {{ counter }}</h4>
+
+    </div>
+
+</div>
+<!-- adas -->
+<div ng-controller="ParseController">
+       <input ng-model="expr"
+                          type="text"
+                          placeholder="Enter an expression" />
+       <h2>parsedValue : {{ parsedValue }}</h2>
+       <h2>expr : {{ expr }}</h2>
+
+</div>
+
+<div ng-controller="InterpolateController">
+       <input ng-model="to" type="email" placeholder="Recipient" />
+       <textarea ng-model="emailBody"></textarea>
+       <pre>{{ previewText }}</pre>
+</div>
+
+
+<div ng-controller="EmailController">
+
+    <div id="emailEditor">
+        <input ng-model="to" type="email" placeholder="Recipient" />
+        <textarea ng-model="emailBody"></textarea>
+    </div>
+    <div id="emailPreview">
+        <pre>{{ previewText }}</pre>
+    </div>
+
+</div>
+
+
+<form name="form" novalidate>
+
+    <input type="text" required />
+
+    <label name="email">Your email</label>
+       <input type="email"
+                        name="email"
+                        ng-model="email"
+                        placeholder="Email Address" />
+     </form>
+
+<label>Select Two Fish:</label>
+<input type="checkbox" ng-model="isTwoFish"><br/>
+<select>
+    <option>One Fish</option>
+    <option ng-selected="isTwoFish">Two Fish</option>
+</select>
+
+</body>
+</html>

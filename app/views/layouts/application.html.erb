@@ -1,0 +1,47 @@
+<!-- START:head -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Humble</title>
+  <%= stylesheet_link_tag "application", media: "all",
+                          "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<!-- END:head -->
+<body class="<%= controller.controller_name %>">
+<!-- START:i18n -->
+<div id="banner" style="position: fixed; width: 100%; z-index: 1;">
+  <!-- END_HIGHLIGHT -->
+  <%= image_tag "http://humble4pie.com/ESW/Images/smallhumblebadge3x3.png", size: "45" %>
+  <%= "Humble Stocks" %>
+
+</div>
+<!-- END:i18n -->
+<div id="columns">
+  <div id="side" style="position: fixed; height: 100%;top: 67px;">
+
+    <ul style="margin-bottom: 20px;">
+
+      <li><%= link_to "Profile #{@current_user.nil? ? '' : "(#{@current_user.name})"}", @current_user.nil? ? "" : "/users/#{@current_user.id}" %></li>
+
+
+    </ul>
+
+    <% unless @current_user.nil? %>
+        <ul style="margin-bottom: 30px;">
+          <li><%= link_to 'Runs', runs_path %></li>
+          <li><%= link_to 'Stocks', stocks_path %></li>
+          <li><%= link_to 'Summary', '/summary/index' %></li>
+
+        </ul>
+        <%= do_logout %>
+    <% end %>
+  </div>
+  <div id="main" style="padding-top: 100px;">
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>
+

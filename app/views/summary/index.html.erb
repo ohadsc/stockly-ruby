@@ -1,0 +1,35 @@
+<div class="summary" id="summary_result_main">
+  <%= render 'summary_result_main', :user_stocks => @user_stocks, :users_roi =>  @users_roi, :selected_run => @selected_run, :runs =>  @runs %>
+
+</div>
+
+<script>
+
+    $(document).ready(function() {
+        $('#select_run').change(function(){
+            changeValue();
+        });
+    });
+
+    function changeValue(){
+        $("table").hide();
+        $(".user_name").hide();
+        $(".time_left").hide();
+        var value = $('#select_run').val()
+        $.ajax({
+            type: 'GET',
+            url: '/summary/run/' + value,
+            cache: false,
+        }).complete(function(data) {
+            $("#summary_result_main").html(data.responseText);
+            $('#select_run').change(function(){
+                changeValue();
+            });
+            $("table").show();
+            $(".user_name").show();
+            $(".time_left").show();
+        })
+    }
+
+
+</script>

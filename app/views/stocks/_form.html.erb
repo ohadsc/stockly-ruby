@@ -1,0 +1,90 @@
+<div class="new_run">
+
+  <% if runs.size > 0 %>
+
+      <div>
+        <label>Run:</label>
+        <a>
+            <%= select_tag 'run_id', options_for_select(runs.map{|run| ["#{run.name}", run.id] }, selected_run.id) %>
+        </a>
+      </div>
+
+      <div>
+        <label>Stock:</label>
+        <input type="text" id="stock_symbol" placeholder="Symbol"/>
+        <span id="loading" style="display:none">Loading...</span>
+      </div>
+
+
+      <div class="new_stock_submit">
+        <input type="button" id="submit_btn" onclick='submit()' value="Add"/>
+      </div>
+
+  <% else %>
+        <div>
+
+          <%= link_to 'Create a Run, Then Add a Stock', new_run_url %>
+
+        </div>
+  <% end unless runs.nil? %>
+
+
+</div>
+
+<div style="clear: both"/>
+
+<script>
+
+    $( document ).ready(function() {
+
+    });
+
+    $(document).keypress(function(e) {
+        if(e.which == 13 && $("#stock_symbol").is(":focus")) {
+            submit();
+        }
+    });
+
+    function submit(){
+
+        $('#loading').show();
+        var run_id = $('select:first').val();
+        var symbol = $('#stock_symbol').val();
+        if (!symbol){
+            return;
+        }
+        var data = { "run_id" : run_id, "symbol" : symbol};
+        var dJson = JSON.stringify(data)
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: dJson,
+            dataType: 'json',
+            cache: false,
+            url: "/stocks",
+        }).complete(function(r) {
+            $('#stock_symbol').blur();
+            if (r.responseText === "stock_added"){
+                window.location = "/stocks";
+                setTimeout(function() {
+                    $('#loading').hide();
+                }, 1000);
+
+            } else {
+                $('#loading').hide();
+                if (r.responseText === "already_5_stocks") {
+                    alert('Cannot add more than 5 stocks');
+                } else if (r.responseText === "existing_stock") {
+                    alert('Stock already exists');
+                } else {
+                    alert('Adding Stock Failed');
+                }
+            }
+
+        })
+    }
+</script>
+
+
+
+

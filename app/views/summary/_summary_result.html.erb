@@ -1,0 +1,63 @@
+<% user_stocks.each do |user, stocks| %>
+    <div class="user_name">
+      <label><%= user.name %> </label>
+    </div>
+
+    <table>
+      <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <th>Symbol</th>
+        <th>Current Price</th>
+        <th>Change Last Day</th>
+        <th>Starting Price</th>
+        <th>Change From Start</th>
+        <th>End Price</th>
+
+      </tr>
+      <% stocks.each do |stock| %>
+
+          <tr class="spaceUnder">
+            <td class="stock_symbol"><%= link_to stock.symbol.upcase, "http://finance.yahoo.com/q?s=#{stock.symbol.upcase}", target: '_blank'  %></td>
+            <td><%= stock.lastTradePriceOnly %></td>
+            <td><%= stock.change %></td>
+
+            <% if stock.start_price.nil? %>
+                <td>NA</td>
+            <% else %>
+                <td><%= stock.start_price %></td>
+            <% end %>
+
+
+            <% if stock.start_price.nil? %>
+                <td>NA</td>
+            <% else %>
+                <%  change = ((stock.lastTradePriceOnly.to_f - stock.start_price.to_f)*100 / stock.start_price.to_f).round(2) %>
+                <td class=<%= change.to_f >= 0 ? "green" : "red" %> ><%= "#{change}%" %></td>
+            <% end %>
+
+            <% if stock.end_price.nil? %>
+                <td>NA</td>
+            <% else %>
+                <td><%=  stock.end_price %></td>
+            <% end %>
+
+          </tr>
+      <% end %>
+      <tr>
+        <td></td>
+      <tr>
+      <tr>
+        <% total_roi = users_roi[user.id].nil? ? 0 : users_roi[user.id] %>
+        <td>Total ROI:<label style="font-weight: bold;" class= <%= total_roi.to_f >= 0 ? "green": "red" %>> <%= total_roi.nil? ? "NA" : "#{total_roi.round(2)}%"   %></label></td>
+      <tr>
+
+      </tbody>
+    </table>
+
+<% end %>

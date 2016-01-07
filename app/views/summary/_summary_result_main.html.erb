@@ -1,0 +1,32 @@
+
+<h1>Summary</h1>
+
+<% unless selected_run.nil? %>
+
+    <div class="summery_select">
+      <label>Run:</label>
+      <a>
+        <%= select_tag 'select_run', options_for_select(runs.map { |run| ["#{run.name}", run.id] }, selected_run.id) unless selected_run.nil? %>
+      </a>
+    </div>
+
+    <div class="time_left">
+
+      <% if !selected_run.done? && !selected_run.started_at.nil? %>
+          <label>Days remaining: <%= 30 - (Time.now.to_datetime - selected_run.started_at.to_datetime).to_i %> </label>
+      <% elsif selected_run.done? %>
+          <b>Run Is Over</b>
+      <% end %>
+
+    </div>
+
+
+    <div id="summary_result">
+      <%= render 'summary_result', :user_stocks => user_stocks, :users_roi => users_roi %>
+    </div>
+
+<% else %>
+    <div class="new_run">
+    <%= link_to 'New Run', new_run_path %>
+        </div>
+<% end %>

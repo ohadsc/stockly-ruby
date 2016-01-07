@@ -1,0 +1,46 @@
+<div class="depot_form">
+  <% if flash[:alert] %>
+      <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+
+  <div>
+  <%= form_tag do %>
+      <fieldset style="height: 90px">
+        <div>
+        <legend>Login with User Name</legend>
+        <div>
+          <%= label_tag :name, 'Name:' %>
+          <%= text_field_tag :name, params[:name] %>
+        </div>
+        <div>
+          <%= label_tag :password, 'Password:' %>
+          <%= password_field_tag :password, params[:password] %>
+        </div>
+        <div style="margin-left: 65px; margin-top: 5px;">
+          <%= submit_tag "Login" %>
+        </div>
+        </div>
+
+      </fieldset>
+  <% end %>
+    </div>
+
+  <div style="margin-top: 0px;">
+    <fieldset style="height: 90px">
+        <div style="text-indent: 6px;width: 151px; height: 22px; background-color: dodgerblue; color: white";>Login with Facebook</div>
+      <div style="margin-left: 35px; margin-top: 20px;">
+        <fb:login-button autologoutlink="true" scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+      </div>
+    </fieldset>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="/angular/scripts/form_controller.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body>
+
+
+<form name="myForm" class="container" ng-app="myApp">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="tags">Tags <small>(comma separated)</small></label>
+                <input type="text" tag-list class="form-control" id="tags" name="tags" ng-model="tags">
+            </div>
+            <div>
+                Tags (model): <code >{{ tags }}</code>
+            </div>
+            <div>
+                <button ng-click="tags = ['one', 'two', 'three']" class="btn">Set Model to <code>["one", "two", "three"]</code></button>
+            </div>
+        </div>
+</form>
+
+</body>
+</html>

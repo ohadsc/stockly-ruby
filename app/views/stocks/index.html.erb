@@ -1,0 +1,39 @@
+<div class="stock_list" id="stocks_result_main">
+  <%= render 'stocks_result_main', :runs => @runs, :selected_run => @selected_run, :stocks => @stocks %>
+</div>
+
+<div id="new_stock_link">
+<% if (@runs||[]).size > 0 %>
+    <%= link_to 'New Stock', new_stock_path %>
+<% else %>
+    <%= link_to 'New Run', new_run_path %>
+<% end %>
+  </div>
+
+<script>
+    $(document).ready(function() {
+        $('#select_run').change(function(){
+            changeValue();
+        });
+    });
+
+    function changeValue(){
+        $("table").hide();
+        $("#new_stock_link").hide();
+        var value = $('#select_run').val();
+        $.ajax({
+            type: 'GET',
+            url: 'stocks/run/' + value,
+            cache: false,
+        }).complete(function(data) {
+            $("#stocks_result_main").html(data.responseText);
+            $('#select_run').change(function(){
+                changeValue();
+            });
+            $("table").show();
+            $("#new_stock_link").show();
+        })
+    }
+
+
+</script>

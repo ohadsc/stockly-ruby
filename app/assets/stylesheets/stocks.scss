@@ -1,0 +1,63 @@
+// Place all the styles related to the Stocks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.new_stock {
+  margin-top: 30px;
+
+  .field {
+    padding-top: 10px;
+    input {
+      height: 20px;
+    }
+  }
+
+  fieldset {
+    margin-bottom: 25px;
+    padding-left: 15px;
+    height: 70px;
+  }
+
+}
+
+
+.stock_list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .run_select{
+    margin-top: 25px;
+    margin-left: 10px;
+  }
+  table {
+    margin-top: 20px;
+    tbody{
+      .spaceUnder {
+        margin-top: 20px;
+        .stock_symbol{
+          a {
+            color: blue;
+          }
+        }
+      }
+      tr{
+        td,th {
+          padding: 0px 40px 0 10px;
+          height: 20px;
+          form {
+            input{
+              margin-bottom: 5px;
+              margin-top: 5px;
+
+            }
+          }
+        }
+        td {
+          text-align: center;
+          img {
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+  }
+}

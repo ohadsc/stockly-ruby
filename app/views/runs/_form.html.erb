@@ -1,0 +1,69 @@
+    <div class="new_run">
+
+      <% if groups.size > 0 %>
+
+
+        <div>
+              <label>Name:</label>
+              <input type="text" id="run_name" placeholder="Run Name"/>
+            </div>
+
+             <div style="margin-top: 10px;margin-bottom: 10px">
+               <label>Group:</label>
+              <%= select_tag 'group_id', options_for_select(groups.map{|group| ["#{group.name}", group.id] }) %>
+            </div>
+
+             <div style="margin-top: 10px;margin-bottom: 10px">
+            <label>Duration: 1 Month</label>
+
+             </div>
+
+        </div>
+
+
+        <div class="new_group_submit">
+
+          <input type="button" id="submit_btn" onclick='submit()' value="Create"/>
+
+        </div>
+
+      <% else %>
+          <div class="new_group_submit" >
+          <%= link_to 'New Group', new_group_path %>
+          </div>
+      <% end %>
+
+      </div>
+
+
+      <div style="clear: both"/>
+
+    <script>
+
+        $( document ).ready(function() {
+
+        });
+
+        function submit(){
+
+            var run_name = $('#run_name').val();
+            var group_id = $('select:first').val();
+            var data = { "group_id" : group_id, "run_name" : run_name};
+            var dJson = JSON.stringify(data)
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                data: dJson,
+                dataType: 'json',
+                cache: false,
+                url: "/runs",
+            }).complete(function(r) {
+                window.location = "/runs";
+
+            })
+        }
+    </script>
+
+
+
+

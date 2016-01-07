@@ -1,0 +1,46 @@
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+    <% flash.clear %>
+<% end %>
+
+<h1>Listing Runs</h1>
+
+<div class="run_list">
+
+<table>
+  <thead>
+
+  </thead>
+
+  <tbody>
+  <tr>
+    <th>Run Name</th>
+    <th>Group</th>
+    <th>Status</th>
+    <th>Duration (months)</th>
+  </tr>
+    <% @runs.each do |run| %>
+
+      <tr class="spaceUnder">
+        <td><%= run.name  %></td>
+        <td><%= run.group_name  %></td>
+        <td><%= run.status.capitalize  %></td>
+        <td><%= run.duration == nil ? "1 Month" : run.duration %></td>
+        <%  if run.pending?  %>
+            <td><%= button_to "Activate", 'run/activate', method: :post, params: {:id => run.id}%></td>
+        <% elsif run.active? %>
+            <td style="font-size: 12px;padding-top: 2px; text-align: center;">
+            <%= button_to "Finalize", 'run/finalize', disabled: false, title: t('disabled_finalize_tooltip'), method: :post, params: {:id => run.id}, data: { confirm: t('are_you_sure_q_end_game')}%>
+            </td>
+        <% else %>
+            <td><%= image_tag "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/check.png", size: "20"  %></td>
+        <% end %>
+        <td><%= link_to 'Delete', run, method: :delete, data: { confirm: t('are_you_sure_q')} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
+
+<%= link_to 'New Run', new_run_path %>
